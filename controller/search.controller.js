@@ -34,7 +34,7 @@ const searchInput = async (req, res) => {
                 res.status(201).json({message: 'Thank you for using our server, Your url will be looked into and we we will get back you.', success: true})
             }
             else{
-                return res.status(500).json({error: 'Request failed, Please check your internet also the url you input and try again.', success: false})
+                return res.status(500).json({error: 'invalid url, check your input and try again.', success: false})
             }
         })
 
