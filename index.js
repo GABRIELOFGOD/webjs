@@ -10,7 +10,10 @@ const searchRouter = require('./routes/search.router')
 const app = express()
 
 const PORT = process.env.PORT || 3200
-app.use(cors())
+app.use(cors({
+    origin: '*',
+    credentials: true
+}))
 
 app.use(express.json())
 
