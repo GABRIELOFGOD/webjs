@@ -11,6 +11,7 @@ const app = express()
 
 const PORT = process.env.PORT || 3200
 app.use(cors({
+    origin: '*',
     credentials: true
 }))
 
