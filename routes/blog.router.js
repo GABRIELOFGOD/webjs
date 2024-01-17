@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
   const upload = multer({storage})
 
 router.post('/post', upload.single('file'), authourizer, adminIdentifier, createBlog)
-router.get('/get', authourizer, getBlogs)
+router.get('/get', getBlogs)
 
 module.exports = router;
 
