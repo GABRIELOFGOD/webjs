@@ -4,8 +4,11 @@ const { validUrl, urlExist } = require('../utils/validator')
 const { newUri } = require('../utils/creator')
 
 const searchInput = async (req, res) => {
-    const { url } = req.body
+    const { url, information } = req.body
     try {
+
+        if(!url) return res.status(401).json({error: 'Input a url and information if there is any.', success: false})
+
         const urls = []
         // =============== VALIDATING URL ================== //
         const isUrl = validUrl(url)
@@ -26,7 +29,8 @@ const searchInput = async (req, res) => {
                 })
                 const savedData = await newUri({
                     url:url,
-                    images:urls
+                    images:urls,
+                    information
                 })
 
                 // ==================== SENDING SUCCESS RESPONSE ====================== //
