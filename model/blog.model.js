@@ -11,7 +11,7 @@ const blogSchema = new mongoose.Schema({
         required:true
     },
     image:{
-        type:String,
+        type: String
     },
     postedBy:{
         type:mongoose.Types.ObjectId,
