@@ -94,4 +94,20 @@ const allUrls = async (req, res) => {
     }
 }
 
-module.exports = { registerAdmin, administratorLogin, allUrls }
+const findAdmin = async (req, res) => {
+    const { _id, name, phone, email } = req.admin
+    res.status(201).json({message: 'Current admin data', data: { name, phone, email, _id }})
+}
+
+const logout = (req, res) => {
+    // const { admin } = req.headers.cookie
+    try {
+        req.headers.cookie
+        res.status(201).clearCookie('admin')
+        console.log('reached')
+    } catch (err) {
+        res.status(500).json({error: 'Server not reached, check your internet and try again. If this error persists, kindly reach out to our support', success: false, errMsg: err})
+    }
+}
+
+module.exports = { registerAdmin, administratorLogin, allUrls, findAdmin, logout }

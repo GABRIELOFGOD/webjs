@@ -1,6 +1,7 @@
 const express = require('express')
-const { registerAdmin, administratorLogin, allUrls } = require('../controller/administrator.controller')
+const { registerAdmin, administratorLogin, allUrls, findAdmin, logout } = require('../controller/administrator.controller')
 const authourizer = require('../middleware/userAuthentication')
+const adminIdentifier = require('../middleware/identity')
 
 const router = express.Router()
 
@@ -8,7 +9,8 @@ const router = express.Router()
 router.route('/register').post(authourizer, registerAdmin)
 
 // ================= LOGIN ROUTE ================== //
-router.route('/login').post(administratorLogin)
+router.route('/login').post(administratorLogin).get(authourizer, adminIdentifier, findAdmin)
+router.get('/logout', logout)
 
 // =================== DATABASE URLS ================== //
 router.route('/urls').get(allUrls)

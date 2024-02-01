@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
   
   const upload = multer({storage})
 
-router.post('/post', upload.single('image'), createBlog)
+router.post('/post', upload.single('file'), createBlog)
 // router.post('/post', subController)
 router.get('/get', getBlogs)
 

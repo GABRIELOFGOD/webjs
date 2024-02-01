@@ -17,6 +17,9 @@ const blogSchema = new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref: 'Admin'
     },
+    posterName:{
+        type: String
+    }
 }, {timestamps: true});
 
 //Export the model
