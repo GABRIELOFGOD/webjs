@@ -45,4 +45,8 @@ const urlData = () => Url.find()
 
 const allBlogs = () => Blog.find()
 
-module.exports = { newUri, adminCreator, addingNewsletter, blogCreator, createdToken, urlData, allBlogs }
+const getAUrl = (id) => Url.findById(id)
+
+const changeExplicit = (id, body) => Url.findByIdAndUpdate(id, body)
+
+module.exports = { newUri, adminCreator, addingNewsletter, blogCreator, createdToken, urlData, allBlogs, getAUrl, changeExplicit }

@@ -1,7 +1,7 @@
 const request = require('request')
 const cherio = require('cherio')
 const { validUrl, urlExist } = require('../utils/validator')
-const { newUri } = require('../utils/creator')
+const { newUri, urlData, getAUrl, changeExplicit } = require('../utils/creator')
 
 const searchInput = async (req, res) => {
     const { url, information } = req.body
@@ -50,4 +50,35 @@ const searchInput = async (req, res) => {
     }
 }
 
-module.exports = searchInput;
+const getAllUrls = async(req, res) => {
+    try {
+        const allUrls = await urlData()
+        res.status(201).json({data: allUrls})
+    } catch (err) {
+        res.status(501).json({error: 'Server not reached, check your internet and try again. If this error persists, kindly reach out to our support', success: false, errMsg: err})
+    }
+}
+
+const getSingleUrl = async (req, res) => {
+    try {
+        const {id} = req.params
+        const result = await getAUrl(id)
+        res.status(202).json({data: result})
+    } catch (err) {
+        res.status(501).json({error: 'Server not reached, check your internet and try again. If this error persists, kindly reach out to our support', success: false, errMsg: err})
+    }
+}
+
+const flagExplicit = async (req, res) => {
+    const {id} = req.params
+    const isExplicit = req.body
+    try {
+        const updatedUrl = await changeExplicit(id, isExplicit)
+        const post = await getAUrl(id)
+        res.status(201).json({message: 'Url updated successfully', data: updatedUrl})
+    } catch (err) {
+        res.status(501).json({error: 'Server not reached, check your internet and try again. If this error persists, kindly reach out to our support', success: false, errMsg: err})
+    }
+}
+
+module.exports = {searchInput, getAllUrls, getSingleUrl, flagExplicit};
